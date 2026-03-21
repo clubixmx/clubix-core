@@ -1,4 +1,4 @@
-package com.clubix.steps;
+package com.clubix.bdd.steps;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

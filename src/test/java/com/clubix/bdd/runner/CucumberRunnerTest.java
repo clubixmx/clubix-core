@@ -1,4 +1,4 @@
-package com.clubix.runner;
+package com.clubix.bdd.runner;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.clubix.steps")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.clubix.bdd.steps")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 public class CucumberRunnerTest {
 }
