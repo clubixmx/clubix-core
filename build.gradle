@@ -10,7 +10,14 @@ repositories { mavenCentral() }
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.platform:junit-platform-suite'
     testRuntimeOnly  'org.junit.platform:junit-platform-launcher'
+
+    // Cucumber
+    testImplementation platform('io.cucumber:cucumber-bom:7.21.1')
+    testImplementation 'io.cucumber:cucumber-java'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine'
+    testImplementation 'io.cucumber:cucumber-picocontainer'
 }
 
 test { useJUnitPlatform() }
