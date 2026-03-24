@@ -1,5 +1,8 @@
-package com.clubix.usecase;
+package com.clubix.usecase.feature;
 
+import com.clubix.usecase.UseCase;
+import com.clubix.usecase.UseCaseFactory;
+import com.clubix.usecase.UseCaseFactoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

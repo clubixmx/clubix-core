@@ -1,5 +1,7 @@
 package com.clubix.usecase;
 
+import com.clubix.usecase.feature.FeatureUseCase;
+
 public class UseCaseFactoryImpl implements UseCaseFactory {
 
     @Override

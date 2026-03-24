@@ -1,5 +1,6 @@
-package com.clubix.usecase;
+package com.clubix.usecase.feature;
 
+import com.clubix.usecase.UseCase;
 import com.clubix.usecase.model.request.FeatureRequest;
 import com.clubix.usecase.model.request.Request;
 import com.clubix.usecase.model.response.FeatureResponse;
