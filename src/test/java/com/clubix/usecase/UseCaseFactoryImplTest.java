@@ -1,10 +1,11 @@
-package com.clubix;
+package com.clubix.usecase;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class UseCaseFactoryImplTest {
+
     private static UseCaseFactory useCaseFactory;
 
     @BeforeAll
@@ -21,9 +22,9 @@ class UseCaseFactoryImplTest {
 
     @Test
     void should_throw_exception_if_feature_use_case_not_found() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            useCaseFactory.get("UnknownUseCase");
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+            useCaseFactory.get("UnknownUseCase")
+        );
     }
-
 }
+

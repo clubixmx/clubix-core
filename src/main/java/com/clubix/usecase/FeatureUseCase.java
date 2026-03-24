@@ -1,9 +1,9 @@
-package com.clubix;
+package com.clubix.usecase;
 
-import com.clubix.boundary.FeatureRequest;
-import com.clubix.boundary.FeatureResponse;
-import com.clubix.boundary.Request;
-import com.clubix.boundary.Response;
+import com.clubix.usecase.model.request.FeatureRequest;
+import com.clubix.usecase.model.request.Request;
+import com.clubix.usecase.model.response.FeatureResponse;
+import com.clubix.usecase.model.response.Response;
 import reactor.core.publisher.Mono;
 import java.util.UUID;
 
@@ -35,3 +35,4 @@ public class FeatureUseCase implements UseCase {
                 .build();
     }
 }
+

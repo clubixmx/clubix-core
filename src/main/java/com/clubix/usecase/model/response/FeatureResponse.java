@@ -1,4 +1,4 @@
-package com.clubix.boundary;
+package com.clubix.usecase.model.response;
 
 import lombok.experimental.SuperBuilder;
 
@@ -7,3 +7,4 @@ public class FeatureResponse extends Response {
     public String id;
     public String name;
 }
+

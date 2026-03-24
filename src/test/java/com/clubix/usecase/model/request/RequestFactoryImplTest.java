@@ -1,10 +1,8 @@
-package com.clubix.boundary;
+package com.clubix.usecase.model.request;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
 import java.util.Map;
 
 class RequestFactoryImplTest {
@@ -24,10 +22,9 @@ class RequestFactoryImplTest {
 
     @Test
     void should_get_request_by_name_with_params() {
-        Map<String,Object> params = new HashMap<>();
-        params.put("name", "Jonathan");
-        Request request = requestFactory.get("FeatureRequest", params);
+        Request request = requestFactory.get("FeatureRequest", Map.of("name", "Jonathan"));
         Assertions.assertInstanceOf(FeatureRequest.class, request);
         Assertions.assertEquals("Jonathan", ((FeatureRequest) request).name);
     }
 }
+

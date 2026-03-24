@@ -1,4 +1,4 @@
-package com.clubix.boundary;
+package com.clubix.usecase.model.request;
 
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -7,3 +7,4 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class Request {
 }
+

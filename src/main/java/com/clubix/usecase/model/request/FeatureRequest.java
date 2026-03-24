@@ -1,4 +1,4 @@
-package com.clubix.boundary;
+package com.clubix.usecase.model.request;
 
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -8,3 +8,4 @@ import lombok.experimental.SuperBuilder;
 public class FeatureRequest extends Request {
     public String name;
 }
+

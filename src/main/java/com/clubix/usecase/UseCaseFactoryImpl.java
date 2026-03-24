@@ -1,6 +1,7 @@
-package com.clubix;
+package com.clubix.usecase;
 
 public class UseCaseFactoryImpl implements UseCaseFactory {
+
     @Override
     public UseCase get(String useCaseName) {
         if ("FeatureUseCase".equals(useCaseName)) {
@@ -9,3 +10,4 @@ public class UseCaseFactoryImpl implements UseCaseFactory {
         throw new IllegalArgumentException("Unknown use case: " + useCaseName);
     }
 }
+

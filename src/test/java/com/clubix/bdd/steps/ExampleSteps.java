@@ -1,9 +1,13 @@
 package com.clubix.bdd.steps;
 
-import com.clubix.UseCase;
-import com.clubix.UseCaseFactory;
-import com.clubix.UseCaseFactoryImpl;
-import com.clubix.boundary.*;
+import com.clubix.usecase.UseCaseFactoryImpl;
+import com.clubix.usecase.model.request.Request;
+import com.clubix.usecase.model.request.RequestFactory;
+import com.clubix.usecase.model.request.RequestFactoryImpl;
+import com.clubix.usecase.model.response.FeatureResponse;
+import com.clubix.usecase.model.response.Response;
+import com.clubix.usecase.UseCase;
+import com.clubix.usecase.UseCaseFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

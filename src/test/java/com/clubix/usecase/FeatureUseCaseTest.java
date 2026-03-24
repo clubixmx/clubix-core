@@ -1,9 +1,9 @@
-package com.clubix;
+package com.clubix.usecase;
 
-import com.clubix.boundary.FeatureResponse;
-import com.clubix.boundary.Request;
-import com.clubix.boundary.RequestFactory;
-import com.clubix.boundary.RequestFactoryImpl;
+import com.clubix.usecase.model.request.Request;
+import com.clubix.usecase.model.request.RequestFactory;
+import com.clubix.usecase.model.request.RequestFactoryImpl;
+import com.clubix.usecase.model.response.FeatureResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,3 +54,4 @@ class FeatureUseCaseTest {
                 .verifyComplete();
     }
 }
+

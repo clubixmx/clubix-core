@@ -1,9 +1,10 @@
-package com.clubix.boundary;
+package com.clubix.usecase.model.request;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 
 public class RequestFactoryImpl implements RequestFactory {
+
     @Override
     public Request get(String requestName, Map<String, Object> params) {
         if ("FeatureRequest".equals(requestName)) {
@@ -24,3 +25,4 @@ public class RequestFactoryImpl implements RequestFactory {
         return request;
     }
 }
+
