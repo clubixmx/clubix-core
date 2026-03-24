@@ -11,11 +11,12 @@ import com.clubix.usecase.UseCaseFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 
-public class ExampleSteps {
+public class FeatureSteps {
 
     private Mono<Response> result;
     private UseCase useCase;
@@ -38,7 +39,12 @@ public class ExampleSteps {
     @Then("I should see the expected result")
     public void iShouldSeeAResult() {
         StepVerifier.create(result)
-                .expectNextMatches(response -> response instanceof FeatureResponse)
+                .assertNext(response -> {
+                    Assertions.assertInstanceOf(FeatureResponse.class, response);
+                    FeatureResponse featureResponse = (FeatureResponse) response;
+                    Assertions.assertNotNull(featureResponse.id);
+                    Assertions.assertEquals("Jonathan", featureResponse.name);
+                })
                 .verifyComplete();
     }
 }
