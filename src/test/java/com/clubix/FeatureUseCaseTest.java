@@ -22,7 +22,7 @@ class FeatureUseCaseTest {
     }
 
     @Test
-    void should_execute_the_use_case() {
+    void should_return_success_when_name_is_provided() {
         //Arrange
         UseCase useCase = useCaseFactory.get("FeatureUseCase");
         Request featureRequest = requestFactory.get("FeatureRequest", Map.of("name", "Jonathan"));
@@ -31,8 +31,25 @@ class FeatureUseCaseTest {
                 .assertNext(response -> {
                     Assertions.assertInstanceOf(FeatureResponse.class, response);
                     FeatureResponse featureResponse = (FeatureResponse) response;
+                    Assertions.assertEquals("SUCCESS", featureResponse.status);
                     Assertions.assertNotNull(featureResponse.id);
                     Assertions.assertEquals("Jonathan", featureResponse.name);
+                })
+                .verifyComplete();
+    }
+
+    @Test
+    void should_return_error_when_name_is_null() {
+        //Arrange
+        UseCase useCase = useCaseFactory.get("FeatureUseCase");
+        Request featureRequest = requestFactory.get("FeatureRequest", Map.of());
+        //Execute & Assert
+        StepVerifier.create(useCase.execute(featureRequest))
+                .assertNext(response -> {
+                    Assertions.assertInstanceOf(FeatureResponse.class, response);
+                    FeatureResponse featureResponse = (FeatureResponse) response;
+                    Assertions.assertEquals("ERROR", featureResponse.status);
+                    Assertions.assertNotNull(featureResponse.error);
                 })
                 .verifyComplete();
     }
