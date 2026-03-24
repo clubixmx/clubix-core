@@ -8,6 +8,12 @@ version = '0.1.0-SNAPSHOT'
 repositories { mavenCentral() }
 
 dependencies {
+    // Spring BOM
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.2.5')
+
+    // Spring WebFlux
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.platform:junit-platform-suite'
@@ -18,6 +24,9 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-java'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine'
     testImplementation 'io.cucumber:cucumber-picocontainer'
+
+    // Reactor Test
+    testImplementation 'io.projectreactor:reactor-test'
 }
 
 test { useJUnitPlatform() }
