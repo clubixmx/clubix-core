@@ -51,12 +51,4 @@ public class FeatureUseCase extends AbstractUseCase<FeatureRequest> {
                 .name(request.name)
                 .build();
     }
-
-    @Override
-    protected Response failure(String reason) {
-        return FeatureResponse.builder()
-                .status("ERROR")
-                .error(reason)
-                .build();
-    }
 }
