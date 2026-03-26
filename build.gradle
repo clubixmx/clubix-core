@@ -7,9 +7,22 @@ plugins {
 group = 'com.clubix'
 version = '0.1.0-SNAPSHOT'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'net.bytebuddy:byte-buddy:1.15.10'
+        force 'net.bytebuddy:byte-buddy-agent:1.15.10'
+    }
 }
 
 dependencies {
@@ -40,9 +53,24 @@ dependencies {
 
     // Reactor Test
     testImplementation 'io.projectreactor:reactor-test'
+
+    // Mockito (explicit version for Java 24 compatibility)
+    testImplementation 'org.mockito:mockito-core:5.14.2'
 }
 
-test { useJUnitPlatform() }
+test {
+    useJUnitPlatform()
+    jvmArgs(
+            "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('byte-buddy-agent') }}",
+            '-XX:+EnableDynamicAgentLoading',
+            '--add-opens=java.base/java.lang=ALL-UNNAMED',
+            '--add-opens=java.base/java.lang.reflect=ALL-UNNAMED'
+    )
+    testLogging {
+        showStandardStreams = true
+        events "passed", "skipped", "failed"
+    }
+}
 
 publishing {
     publications {
@@ -54,5 +82,3 @@ publishing {
         mavenLocal()
     }
 }
-
-
