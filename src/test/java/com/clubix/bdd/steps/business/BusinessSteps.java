@@ -9,6 +9,7 @@ import com.usecase.model.request.Request;
 import com.usecase.model.request.RequestFactory;
 import com.usecase.model.request.RequestFactoryImpl;
 import com.usecase.model.response.Response;
+import com.usecase.shared.ValidationException;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -38,6 +39,8 @@ public class BusinessSteps {
         queryBalanceUseCase = new QueryBalanceUseCase(customerRepository);
     }
 
+    // ── Givens ────────────────────────────────────────────────────────────────
+
     @Given("a customer with ID {string} exists")
     public void a_customer_with_id_exists(String customerId) {
         Customer customer = Customer.builder()
@@ -47,11 +50,26 @@ public class BusinessSteps {
         when(customerRepository.findById(customerId)).thenReturn(Mono.just(customer));
     }
 
+    @Given("no customer with ID {string} exists")
+    public void no_customer_with_id_exists(String customerId) {
+        when(customerRepository.findById(customerId)).thenReturn(Mono.empty());
+    }
+
+    @Given("the balance service is unavailable for customer ID {string}")
+    public void the_balance_service_is_unavailable(String customerId) {
+        when(customerRepository.findById(customerId))
+                .thenReturn(Mono.error(new RuntimeException("DB connection failed")));
+    }
+
+    // ── When ──────────────────────────────────────────────────────────────────
+
     @When("I query the balance for customer ID {string}")
     public void i_query_the_balance_for_customer_id(String customerId) {
         Request request = requestFactory.get("QueryBalanceRequest", Map.of("customerId", customerId));
         response = queryBalanceUseCase.execute(request);
     }
+
+    // ── Thens ─────────────────────────────────────────────────────────────────
 
     @Then("the response should contain the balance information for customer ID {string}")
     public void the_response_should_contain_the_balance_information_for_customer_id(String customerId) {
@@ -63,5 +81,21 @@ public class BusinessSteps {
                     Assertions.assertEquals(expectedBalance, qbr.balance);
                 })
                 .verifyComplete();
+    }
+
+    @Then("the response should signal a not found error for customer ID {string}")
+    public void the_response_should_signal_a_not_found_error(String customerId) {
+        StepVerifier.create(response)
+                .verifyErrorMatches(e ->
+                        e instanceof ValidationException &&
+                        e.getMessage().contains(customerId));
+    }
+
+    @Then("the response should signal a service unavailable error")
+    public void the_response_should_signal_a_service_unavailable_error() {
+        StepVerifier.create(response)
+                .verifyErrorMatches(e ->
+                        e instanceof RuntimeException &&
+                        "DB connection failed".equals(e.getMessage()));
     }
 }

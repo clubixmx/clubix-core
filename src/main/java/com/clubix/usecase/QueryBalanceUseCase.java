@@ -31,6 +31,7 @@ public class QueryBalanceUseCase extends AbstractUseCase<QueryBalanceRequest> {
     @Override
     protected Mono<Response> process(QueryBalanceRequest request) {
         return customerRepository.findById(request.customerId)
+                .switchIfEmpty(Mono.error(new ValidationException("Customer not found: " + request.customerId)))
                 .map(this::success);
     }
 
