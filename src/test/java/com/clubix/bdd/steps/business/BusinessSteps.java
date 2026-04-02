@@ -39,8 +39,6 @@ public class BusinessSteps {
         queryBalanceUseCase = new QueryBalanceUseCase(customerRepository);
     }
 
-    // ── Givens ────────────────────────────────────────────────────────────────
-
     @Given("a customer with ID {string} exists")
     public void a_customer_with_id_exists(String customerId) {
         Customer customer = Customer.builder()
@@ -61,15 +59,11 @@ public class BusinessSteps {
                 .thenReturn(Mono.error(new RuntimeException("DB connection failed")));
     }
 
-    // ── When ──────────────────────────────────────────────────────────────────
-
     @When("I query the balance for customer ID {string}")
     public void i_query_the_balance_for_customer_id(String customerId) {
         Request request = requestFactory.get("QueryBalanceRequest", Map.of("customerId", customerId));
         response = queryBalanceUseCase.execute(request);
     }
-
-    // ── Thens ─────────────────────────────────────────────────────────────────
 
     @Then("the response should contain the balance information for customer ID {string}")
     public void the_response_should_contain_the_balance_information_for_customer_id(String customerId) {
